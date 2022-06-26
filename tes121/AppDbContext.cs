@@ -1,17 +1,20 @@
 ﻿using System;
 using System.Collections.Generic;
-//using System.Data.Entity;
+using System.Data.Entity;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
 namespace tes121
 {
-    // public class AppDbContext : DbContext
-    //{
-    //    public AppDbContext() :
-    //    base("defaultConnect")
-    //    { }
-        
-    //}
+    public class AppDbContext : DbContext
+    {
+        public AppDbContext() :
+        base("BookStoreContext")
+        { }
+
+       public DbSet<Category> Categories { get; set; }
+       public DbSet<Region> Regions { get; set; }
+
+    }
 }

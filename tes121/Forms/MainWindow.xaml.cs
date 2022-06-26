@@ -9,6 +9,7 @@ using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Data;
 using System.Windows.Documents;
+using System.Windows.Forms;
 using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
@@ -24,8 +25,11 @@ namespace tes121
     {
         public MainWindow()
         {
+           
             InitializeComponent();
-           // tblOrdersDataGrid.ItemsSource = dbDataSetTableAdapters.Tables.OfType<DataTable>().Select(dt => dt.TableName);
+            DataContext = new ApplicationViewModel();
+
+            // tblOrdersDataGrid.ItemsSource = dbDataSetTableAdapters.Tables.OfType<DataTable>().Select(dt => dt.TableName);
         }
 
         private void Button_Click(object sender, RoutedEventArgs e)
@@ -117,39 +121,10 @@ namespace tes121
         private void Window_Loaded(object sender, RoutedEventArgs e)
         {
 
-            tes121.dbDataSet dbDataSet = ((tes121.dbDataSet)(this.FindResource("dbDataSet")));
-            // Load data into the table tblRn. You can modify this code as needed.
-            tes121.dbDataSetTableAdapters.tblRnTableAdapter dbDataSettblRnTableAdapter = new tes121.dbDataSetTableAdapters.tblRnTableAdapter();
-            dbDataSettblRnTableAdapter.Fill(dbDataSet.tblRn);
-            System.Windows.Data.CollectionViewSource tblRnViewSource = ((System.Windows.Data.CollectionViewSource)(this.FindResource("tblRnViewSource")));
-            tblRnViewSource.View.MoveCurrentToFirst();
-            // Load data into the table tblOrders. You can modify this code as needed.
-            tes121.dbDataSetTableAdapters.tblOrdersTableAdapter dbDataSettblOrdersTableAdapter = new tes121.dbDataSetTableAdapters.tblOrdersTableAdapter();
-            dbDataSettblOrdersTableAdapter.Fill(dbDataSet.tblOrders);
-            System.Windows.Data.CollectionViewSource tblOrdersViewSource = ((System.Windows.Data.CollectionViewSource)(this.FindResource("tblOrdersViewSource")));
-            tblOrdersViewSource.View.MoveCurrentToFirst();
-            // Load data into the table tblClient. You can modify this code as needed.
-            tes121.dbDataSetTableAdapters.tblClientTableAdapter dbDataSettblClientTableAdapter = new tes121.dbDataSetTableAdapters.tblClientTableAdapter();
-            dbDataSettblClientTableAdapter.Fill(dbDataSet.tblClient);
-            System.Windows.Data.CollectionViewSource tblClientViewSource = ((System.Windows.Data.CollectionViewSource)(this.FindResource("tblClientViewSource")));
-            tblClientViewSource.View.MoveCurrentToFirst();
-            // Load data into the table tblCategory. You can modify this code as needed.
-            tes121.dbDataSetTableAdapters.tblCategoryTableAdapter dbDataSettblCategoryTableAdapter = new tes121.dbDataSetTableAdapters.tblCategoryTableAdapter();
-            dbDataSettblCategoryTableAdapter.Fill(dbDataSet.tblCategory);
-            System.Windows.Data.CollectionViewSource tblCategoryViewSource = ((System.Windows.Data.CollectionViewSource)(this.FindResource("tblCategoryViewSource")));
-            tblCategoryViewSource.View.MoveCurrentToFirst();
-        }
-        private void LoadBookList()
-        {
-            using (AppDbContext db = new AppDbContext())
-            {
-                db.tblDolzhs.Load();
-               // tblOrdersDataGrid.DataContext = db.tblDolzhs.ToList();
-            }
         }
         private void Button_Click_3(object sender, RoutedEventArgs e)
         {
-            LoadBookList();
+           
         }
 
         private void BtnPIN_Click(object sender, RoutedEventArgs e)
@@ -162,6 +137,39 @@ namespace tes121
         {
             FastReport.Report report = new FastReport.Report();
 
+        }
+
+        private void Button_Click_5(object sender, RoutedEventArgs e)
+        {
+
+
+        }
+        /// <summary>
+        /// REgion TAB
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void TabItem_Initialized(object sender, EventArgs e)
+        {
+            AppDbContext db;
+            db = new AppDbContext();
+            db.Categories.Load();
+            var list = db.Categories.ToList();
+            this.DataContext = list;
+        }
+
+        private void TabItem_Initialized_1(object sender, EventArgs e)
+        {
+
+        }
+
+        private void TabItem_MouseDown(object sender, MouseButtonEventArgs e)
+        {
+            AppDbContext db;
+            db = new AppDbContext();
+            db.Categories.Load();
+            var list = db.Categories.ToList();
+            this.DataContext = db.Categories.Local.ToBindingList();
         }
     }
 }
