@@ -1,0 +1,26 @@
+﻿<Window x:Class="tes121.Forms.Auth"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:tes121.Forms" xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
+        mc:Ignorable="d"
+              Title="Форма авторизации" ResizeMode="NoResize" Height="260.048" Width="392.701">
+    <Grid Margin="0,0,2,6">
+        <TextBox  materialDesign:HintAssist.Hint="Имя" HorizontalAlignment="Left" Height="32" Margin="75,80,0,0" TextWrapping="Wrap"  Text="" VerticalAlignment="Top" Width="246"/>
+        <PasswordBox materialDesign:HintAssist.Hint="Пароль"  HorizontalAlignment="Left" Height="30" Margin="75,132,0,0"  VerticalAlignment="Top" Width="246"/>
+
+        <materialDesign:PackIcon Kind="Account" Margin="49,87,0,0" />
+        <materialDesign:PackIcon Kind="FormTextboxPassword" Margin="49,139,0,0" />
+        <Button Margin="147,183,155,10" RenderTransformOrigin="0.5,0.5">
+            <StackPanel>
+                <TextBlock
+      Text="Войти" />
+
+            </StackPanel>
+        </Button>
+        <materialDesign:PackIcon Kind="Show" HorizontalAlignment="Left" Margin="325,139,0,0" VerticalAlignment="Top" RenderTransformOrigin="0.604,0.104"/>
+        <materialDesign:PackIcon Kind="Show" HorizontalAlignment="Left" Margin="325,93,0,0" VerticalAlignment="Top" RenderTransformOrigin="0.604,0.104"/>
+
+    </Grid>
+</Window>

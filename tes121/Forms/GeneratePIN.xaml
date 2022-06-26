@@ -1,0 +1,18 @@
+﻿<Window xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"  x:Class="tes121.Forms.GeneratePIN"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:tes121.Forms"
+        mc:Ignorable="d"
+        Title="GeneratePIN" Height="284" Width="626">
+    <Grid>
+        <TextBox x:Name="txtPIN" HorizontalAlignment="Left" Height="32" Margin="88,90,0,0" TextWrapping="Wrap"  VerticalAlignment="Top" Width="300"/>
+        <Button x:Name="BtnGenPIN"  Content="Сгенерировать" HorizontalAlignment="Left" Margin="464,90,0,0" VerticalAlignment="Top" Width="138" Click="BtnGenPIN_Click"/>
+        <Button x:Name="BtnCopyPIN" HorizontalAlignment="Left" Margin="393,90,0,0" VerticalAlignment="Top" Width="62" Click="BtnCopyPIN_Click">
+            <materialDesign:PackIcon Kind="ContentCopy"/>
+        </Button>
+        <Button Content="Выйти" IsCancel="True" HorizontalAlignment="Left" Margin="252,195,0,0" VerticalAlignment="Top" Width="112"/>
+
+    </Grid>
+</Window>

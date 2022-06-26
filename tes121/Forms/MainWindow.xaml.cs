@@ -1,5 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Data;
+using System.Data.Entity;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -23,6 +25,7 @@ namespace tes121
         public MainWindow()
         {
             InitializeComponent();
+           // tblOrdersDataGrid.ItemsSource = dbDataSetTableAdapters.Tables.OfType<DataTable>().Select(dt => dt.TableName);
         }
 
         private void Button_Click(object sender, RoutedEventArgs e)
@@ -109,6 +112,56 @@ namespace tes121
                 BtnSave.IsEnabled = true;
                 BtnChange.Content = "Отмена";
             }
+        }
+
+        private void Window_Loaded(object sender, RoutedEventArgs e)
+        {
+
+            tes121.dbDataSet dbDataSet = ((tes121.dbDataSet)(this.FindResource("dbDataSet")));
+            // Load data into the table tblRn. You can modify this code as needed.
+            tes121.dbDataSetTableAdapters.tblRnTableAdapter dbDataSettblRnTableAdapter = new tes121.dbDataSetTableAdapters.tblRnTableAdapter();
+            dbDataSettblRnTableAdapter.Fill(dbDataSet.tblRn);
+            System.Windows.Data.CollectionViewSource tblRnViewSource = ((System.Windows.Data.CollectionViewSource)(this.FindResource("tblRnViewSource")));
+            tblRnViewSource.View.MoveCurrentToFirst();
+            // Load data into the table tblOrders. You can modify this code as needed.
+            tes121.dbDataSetTableAdapters.tblOrdersTableAdapter dbDataSettblOrdersTableAdapter = new tes121.dbDataSetTableAdapters.tblOrdersTableAdapter();
+            dbDataSettblOrdersTableAdapter.Fill(dbDataSet.tblOrders);
+            System.Windows.Data.CollectionViewSource tblOrdersViewSource = ((System.Windows.Data.CollectionViewSource)(this.FindResource("tblOrdersViewSource")));
+            tblOrdersViewSource.View.MoveCurrentToFirst();
+            // Load data into the table tblClient. You can modify this code as needed.
+            tes121.dbDataSetTableAdapters.tblClientTableAdapter dbDataSettblClientTableAdapter = new tes121.dbDataSetTableAdapters.tblClientTableAdapter();
+            dbDataSettblClientTableAdapter.Fill(dbDataSet.tblClient);
+            System.Windows.Data.CollectionViewSource tblClientViewSource = ((System.Windows.Data.CollectionViewSource)(this.FindResource("tblClientViewSource")));
+            tblClientViewSource.View.MoveCurrentToFirst();
+            // Load data into the table tblCategory. You can modify this code as needed.
+            tes121.dbDataSetTableAdapters.tblCategoryTableAdapter dbDataSettblCategoryTableAdapter = new tes121.dbDataSetTableAdapters.tblCategoryTableAdapter();
+            dbDataSettblCategoryTableAdapter.Fill(dbDataSet.tblCategory);
+            System.Windows.Data.CollectionViewSource tblCategoryViewSource = ((System.Windows.Data.CollectionViewSource)(this.FindResource("tblCategoryViewSource")));
+            tblCategoryViewSource.View.MoveCurrentToFirst();
+        }
+        private void LoadBookList()
+        {
+            using (AppDbContext db = new AppDbContext())
+            {
+                db.tblDolzhs.Load();
+               // tblOrdersDataGrid.DataContext = db.tblDolzhs.ToList();
+            }
+        }
+        private void Button_Click_3(object sender, RoutedEventArgs e)
+        {
+            LoadBookList();
+        }
+
+        private void BtnPIN_Click(object sender, RoutedEventArgs e)
+        {
+            Forms.GeneratePIN generatePIN = new Forms.GeneratePIN();
+            generatePIN.ShowDialog();
+        }
+
+        private void Button_Click_4(object sender, RoutedEventArgs e)
+        {
+            FastReport.Report report = new FastReport.Report();
+
         }
     }
 }

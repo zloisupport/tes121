@@ -6,7 +6,15 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:tes121"
         mc:Ignorable="d"
-        Title="MainWindow" ResizeMode="NoResize" Height="504" Width="854">
+        Title="MainWindow" ResizeMode="NoResize" Height="504" Width="854" Loaded="Window_Loaded">
+    <Window.Resources>
+        <local:dbDataSet x:Key="dbDataSet"/>
+        <CollectionViewSource x:Key="tblRnViewSource" Source="{Binding tblRn, Source={StaticResource dbDataSet}}"/>
+        <CollectionViewSource x:Key="tblOrdersViewSource" Source="{Binding tblOrders, Source={StaticResource dbDataSet}}"/>
+        <CollectionViewSource x:Key="tblClientViewSource" Source="{Binding tblClient, Source={StaticResource dbDataSet}}"/>
+        <CollectionViewSource x:Key="tblCategoryViewSource" Source="{Binding tblCategory, Source={StaticResource dbDataSet}}"/>
+        <CollectionViewSource x:Key="tblCategorytblOrdersViewSource" Source="{Binding tblCategorytblOrders, Source={StaticResource tblCategoryViewSource}}"/>
+    </Window.Resources>
     <Grid>
         <TabControl TabStripPlacement="Left">
 
@@ -29,7 +37,7 @@
                     <Button x:Name="BtnSave" Content="Сохранить" HorizontalAlignment="Left" Margin="403,411,0,0" VerticalAlignment="Top" Width="198" IsEnabled="False"/>
                     <Ellipse HorizontalAlignment="Left" Height="148" Margin="512,8,0,0" VerticalAlignment="Top" Width="152">
                         <Ellipse.Fill>
-                            <ImageBrush ImageSource="..\Resource\Images\avatar.jpg" />
+                            <ImageBrush ImageSource="..\Resource\Images\logo.jpg" />
                         </Ellipse.Fill>
                     </Ellipse>
                     <Label Content="Телефон"  HorizontalAlignment="Left" Margin="53,277,0,0" VerticalAlignment="Top" RenderTransformOrigin="-0.278,1.125" Width="163"/>
@@ -60,17 +68,9 @@
                         <Label Content="История" VerticalContentAlignment="Bottom" Foreground="White" Margin="15,0,0,-5"/>
                     </Grid>
                 </TabItem.Header>
-                <Grid Name="GridHistory" >
-                    <DataGrid HorizontalAlignment="Left" Height="473" VerticalAlignment="Top" Width="445">
-                        <DataGrid.Columns>
-                            <DataGridTextColumn Header="Обслуживал" Binding="{Binding Path=Title}" Width="150" />
-                            <DataGridHyperlinkColumn Header="Клиент" Binding="{Binding Path=Company}" Width="100" />
-                            <DataGridTextColumn Header="Услуга" Binding="{Binding Path=Price}" Width="100" />
-                            <DataGridTextColumn Header="Дата" Binding="{Binding Path=Price}" Width="100" />
-                        </DataGrid.Columns>
-                    </DataGrid>
+                <Grid Name="GridHistory" DataContext="{StaticResource tblOrdersViewSource}">
                     <Button
-                      ToolTip="Печать" Margin="651,10,14,410" Height="Auto" Width="Auto">
+                      ToolTip="Печать" Margin="651,10,14,410" Height="Auto" Width="Auto" Click="Button_Click_4">
                         <materialDesign:PackIcon
                         Kind="Printer"
                         Height="24"
@@ -91,6 +91,39 @@
                             Height="24"
                             Width="24" />
                     </Button>
+                    <Grid x:Name="grid3" DataContext="{StaticResource tblCategoryViewSource}" HorizontalAlignment="Left" Margin="120,338,0,0" VerticalAlignment="Top">
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="Auto"/>
+                            <ColumnDefinition Width="Auto"/>
+                        </Grid.ColumnDefinitions>
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="Auto"/>
+                        </Grid.RowDefinitions>
+                    </Grid>
+                    <Grid x:Name="grid4" DataContext="{StaticResource tblCategorytblOrdersViewSource}" HorizontalAlignment="Left" Margin="284,282,0,0" VerticalAlignment="Top">
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="Auto"/>
+                            <ColumnDefinition Width="Auto"/>
+                        </Grid.ColumnDefinitions>
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="Auto"/>
+                        </Grid.RowDefinitions>
+                    </Grid>
+                    <DataGrid x:Name="tblOrdersDataGrid" AutoGenerateColumns="False" EnableRowVirtualization="True" ItemsSource="{Binding}" Margin="10,10,282,230" RowDetailsVisibilityMode="VisibleWhenSelected">
+                        <DataGrid.Columns>
+                            <DataGridTextColumn x:Name="order_idColumn" Binding="{Binding order_id}" Header="order id" Width="SizeToHeader"/>
+                            <DataGridTextColumn x:Name="manager_idColumn" Binding="{Binding manager_id}" Header="manager id" Width="SizeToHeader"/>
+                            <DataGridTextColumn x:Name="client_idColumn" Binding="{Binding client_id}" Header="client id" Width="SizeToHeader"/>
+                            <DataGridTextColumn x:Name="cat_idColumn" Binding="{Binding cat_id}" Header="cat id" Width="SizeToHeader"/>
+                            <DataGridTemplateColumn x:Name="date_ordersColumn" Header="date orders" Width="SizeToHeader">
+                                <DataGridTemplateColumn.CellTemplate>
+                                    <DataTemplate>
+                                        <DatePicker SelectedDate="{Binding date_orders, Mode=TwoWay, NotifyOnValidationError=true, ValidatesOnExceptions=true}"/>
+                                    </DataTemplate>
+                                </DataGridTemplateColumn.CellTemplate>
+                            </DataGridTemplateColumn>
+                        </DataGrid.Columns>
+                    </DataGrid>
                 </Grid>
             </TabItem>
             <TabItem>
@@ -100,24 +133,12 @@
                         <Label Content="Регионы" VerticalContentAlignment="Bottom" Foreground="White" Margin="15,0,0,0"/>
                     </Grid>
                 </TabItem.Header>
-                <Grid>
+                <Grid DataContext="{StaticResource tblRnViewSource}">
 
-                    <ListBox
-  IsEnabled="{Binding IsChecked, ElementName=EnableListBox}" Margin="29,30,414,45" RenderTransformOrigin="0.449,0.461">
-                        <TextBlock>
- г. Токмок
-                        </TextBlock>
-                        <TextBlock>
-  Прогресс
-                        </TextBlock>
-                        <TextBlock>
-  Шамшы
-                        </TextBlock>
-                        <TextBlock>
-Онбир-Жылга
-                        </TextBlock>
+                    <ListBox DataContext="{Binding names}" Margin="29,30,414,375" RenderTransformOrigin="0.449,0.461">
+
                     </ListBox>
-                    <TextBox HorizontalAlignment="Left" Height="35" Margin="378,34,0,0" TextWrapping="Wrap" materialDesign:HintAssist.Hint="Регион" VerticalAlignment="Top" Width="154"/>
+                    <TextBox HorizontalAlignment="Left"  Text="{Binding names, Mode=TwoWay, NotifyOnValidationError=true, ValidatesOnExceptions=true}" Height="35" Margin="378,34,0,0" TextWrapping="Wrap" materialDesign:HintAssist.Hint="Регион" VerticalAlignment="Top" Width="154"/>
                     <Button
                       Style="{StaticResource MaterialDesignFloatingActionDarkButton}"
                       ToolTip="Сохранить" Margin="378,90,279,314" Height="Auto" Width="Auto">
@@ -134,6 +155,20 @@
                         Height="24"
                         Width="24" />
                     </Button>
+                    <Grid x:Name="grid1" DataContext="{StaticResource tblRnViewSource}" HorizontalAlignment="Left" Margin="58,131,0,0" VerticalAlignment="Top">
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="Auto"/>
+                            <ColumnDefinition Width="Auto"/>
+                        </Grid.ColumnDefinitions>
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="Auto"/>
+                        </Grid.RowDefinitions>
+                    </Grid>
+                    <DataGrid x:Name="tblRnDataGrid" AutoGenerateColumns="False" EnableRowVirtualization="True" ItemsSource="{Binding}" Margin="10,30,376,125" RowDetailsVisibilityMode="VisibleWhenSelected">
+                        <DataGrid.Columns>
+                            <DataGridTextColumn x:Name="namesColumn" Binding="{Binding names}" Header="Название" Width="180"/>
+                        </DataGrid.Columns>
+                    </DataGrid>
                 </Grid>
             </TabItem>
             <TabItem >
@@ -169,7 +204,7 @@
                         RadiusX="31"
                         RadiusY="31" Margin="58,-264,248,547" Grid.ColumnSpan="2" Grid.Column="1" >
                         <Rectangle.Fill>
-                            <ImageBrush ImageSource="..\Resource\Images\deti-i-gadzhety.jpg" Stretch="None"/>
+                            <ImageBrush ImageSource="..\Resource\Images\deti-i-gadzhety.jpg"/>
                         </Rectangle.Fill>
                         <Rectangle.RenderTransform>
                             <TranslateTransform
@@ -204,6 +239,7 @@
                                 Y="282" />
                         </Rectangle.RenderTransform>
                     </Rectangle>
+                    <Button x:Name="BtnPIN" Margin="66,328,60,78" Content="Св. о браке" RenderTransformOrigin="0.491,4.312" Foreground="White" Grid.Column="2" Height="Auto" Click="BtnPIN_Click" />
                 </Grid>
 
             </TabItem>
