@@ -1,0 +1,215 @@
+﻿<Window xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"  x:Class="tes121.MainWindow"
+        
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:tes121"
+        mc:Ignorable="d"
+        Title="MainWindow" ResizeMode="NoResize" Height="504" Width="854">
+    <Grid>
+        <TabControl TabStripPlacement="Left">
+
+            <TabItem >
+                <TabItem.Header>
+                    <Grid HorizontalAlignment="Stretch">
+                        <materialDesign:PackIcon Kind="Home" Foreground="White" VerticalAlignment="Stretch" Height="Auto" Margin="0,2,0,0" />
+                        <Label Content="Профиль" VerticalContentAlignment="Bottom" Foreground="White" Margin="15,0,0,-6"/>
+                    </Grid>
+                </TabItem.Header>
+                <Grid >
+                    <TextBox x:Name="FistName" Margin="53,140,493,299" IsEnabled="False"  />
+                    <Label Content="Фамилия" HorizontalAlignment="Left" Margin="53,112,0,0" VerticalAlignment="Top" RenderTransformOrigin="-0.278,1.125" Width="163"/>
+                    <Label Content="Имя" HorizontalAlignment="Left" Margin="277,110,0,0" VerticalAlignment="Top" RenderTransformOrigin="-0.278,1.125" Width="163"/>
+
+                    <Label Content="Отчество" HorizontalAlignment="Left" Margin="53,192,0,0" VerticalAlignment="Top" RenderTransformOrigin="-0.278,1.125" Width="163"/>
+                    <TextBox x:Name="Position" Margin="512,322,0,118" IsReadOnly="True" RenderTransformOrigin="0.47,0.455" HorizontalAlignment="Left" Width="133" IsEnabled="False" />
+                    <Label Content="Ваша должность"  HorizontalAlignment="Left" Margin="512,277,0,0" VerticalAlignment="Top" RenderTransformOrigin="-0.278,1.125" Width="163"/>
+                    <Label Content="Адрес проживания" Margin="265,192,304,0" VerticalAlignment="Top" />
+                    <Button x:Name="BtnSave" Content="Сохранить" HorizontalAlignment="Left" Margin="403,411,0,0" VerticalAlignment="Top" Width="198" IsEnabled="False"/>
+                    <Ellipse HorizontalAlignment="Left" Height="148" Margin="512,8,0,0" VerticalAlignment="Top" Width="152">
+                        <Ellipse.Fill>
+                            <ImageBrush ImageSource="..\Resource\Images\avatar.jpg" />
+                        </Ellipse.Fill>
+                    </Ellipse>
+                    <Label Content="Телефон"  HorizontalAlignment="Left" Margin="53,277,0,0" VerticalAlignment="Top" RenderTransformOrigin="-0.278,1.125" Width="163"/>
+
+                    <Label Content="Email"  HorizontalAlignment="Left" Margin="265,277,0,0" VerticalAlignment="Top" RenderTransformOrigin="-0.278,1.125" Width="163"/>
+                    <TextBox x:Name="LastName" Margin="278,140,269,299" IsEnabled="False"  />
+                    <TextBox x:Name="Address" Margin="265,222,113,217" IsEnabled="False"  />
+                    <TextBox x:Name="SubName" Margin="53,222,493,217" IsEnabled="False"  />
+                    <TextBox x:Name="Email" Margin="265,322,287,117" IsEnabled="False"  />
+                    <TextBox x:Name="Phone" Margin="53,323,516,117" IsEnabled="False"  />
+                    <TextBox Name="Login" Margin="114,54,493,385" IsEnabled="False"  />
+                    <Label Content="Логин" HorizontalAlignment="Left" Margin="53,54,0,0" VerticalAlignment="Top" RenderTransformOrigin="-0.278,1.125" Width="56"/>
+                    <PasswordBox x:Name="pwdBox" PasswordChar="*" Margin="320,54,287,385" IsEnabled="False"  />
+                    <TextBox x:Name="pwdTxtBox" Text="{Binding Password , Mode=TwoWay,ElementName=pwdBox}" Margin="320,54,287,385" Visibility="Collapsed" />
+                    <Label Content="Пароль&#xA;" HorizontalAlignment="Left" Margin="254,54,0,0" VerticalAlignment="Top" RenderTransformOrigin="-0.278,1.125" Width="56"/>
+                    <materialDesign:PackIcon x:Name="BtnSHpwd"  Kind="Show" HorizontalAlignment="Left" Margin="457,54,0,0" VerticalAlignment="Top" Height="36" Width="44" MouseDown="ShowHidePwd" IsEnabled="False"/>
+                    <Button Style="{StaticResource MaterialDesignRaisedAccentButton}" x:Name="BtnChange" IsDefault="False" Content="Изменить" HorizontalAlignment="Left" Margin="150,411,0,0" VerticalAlignment="Top" Width="198" Click="BtnChange_Click"/>
+
+                </Grid>
+
+
+            </TabItem>
+
+            <TabItem>
+                <TabItem.Header>
+                    <Grid HorizontalAlignment="Stretch">
+                        <materialDesign:PackIcon Kind="Historic" Foreground="White" VerticalAlignment="Stretch" />
+                        <Label Content="История" VerticalContentAlignment="Bottom" Foreground="White" Margin="15,0,0,-5"/>
+                    </Grid>
+                </TabItem.Header>
+                <Grid Name="GridHistory" >
+                    <DataGrid HorizontalAlignment="Left" Height="473" VerticalAlignment="Top" Width="445">
+                        <DataGrid.Columns>
+                            <DataGridTextColumn Header="Обслуживал" Binding="{Binding Path=Title}" Width="150" />
+                            <DataGridHyperlinkColumn Header="Клиент" Binding="{Binding Path=Company}" Width="100" />
+                            <DataGridTextColumn Header="Услуга" Binding="{Binding Path=Price}" Width="100" />
+                            <DataGridTextColumn Header="Дата" Binding="{Binding Path=Price}" Width="100" />
+                        </DataGrid.Columns>
+                    </DataGrid>
+                    <Button
+                      ToolTip="Печать" Margin="651,10,14,410" Height="Auto" Width="Auto">
+                        <materialDesign:PackIcon
+                        Kind="Printer"
+                        Height="24"
+                        Width="24" />
+                    </Button>
+                    <Calendar HorizontalAlignment="Left" Margin="470,70,0,0" VerticalAlignment="Top" Height="337" Width="248" FontSize="9"/>
+                    <Button IsEnabled="False"
+                        ToolTip="Copy" Margin="470,10,198,410" Height="Auto" Width="Auto">
+                        <materialDesign:PackIcon
+                            Kind="ContentCopy"
+                            Height="24"
+                            Width="24" />
+                    </Button>
+                    <Button IsEnabled="False"
+                        ToolTip="Export" Margin="570,10,100,410" Height="Auto" Width="Auto">
+                        <materialDesign:PackIcon
+                            Kind="FileExport"
+                            Height="24"
+                            Width="24" />
+                    </Button>
+                </Grid>
+            </TabItem>
+            <TabItem>
+                <TabItem.Header>
+                    <Grid HorizontalAlignment="Stretch">
+                        <materialDesign:PackIcon Kind="Map" Foreground="White" VerticalAlignment="Stretch" />
+                        <Label Content="Регионы" VerticalContentAlignment="Bottom" Foreground="White" Margin="15,0,0,0"/>
+                    </Grid>
+                </TabItem.Header>
+                <Grid>
+
+                    <ListBox
+  IsEnabled="{Binding IsChecked, ElementName=EnableListBox}" Margin="29,30,414,45" RenderTransformOrigin="0.449,0.461">
+                        <TextBlock>
+ г. Токмок
+                        </TextBlock>
+                        <TextBlock>
+  Прогресс
+                        </TextBlock>
+                        <TextBlock>
+  Шамшы
+                        </TextBlock>
+                        <TextBlock>
+Онбир-Жылга
+                        </TextBlock>
+                    </ListBox>
+                    <TextBox HorizontalAlignment="Left" Height="35" Margin="378,34,0,0" TextWrapping="Wrap" materialDesign:HintAssist.Hint="Регион" VerticalAlignment="Top" Width="154"/>
+                    <Button
+                      Style="{StaticResource MaterialDesignFloatingActionDarkButton}"
+                      ToolTip="Сохранить" Margin="378,90,279,314" Height="Auto" Width="Auto">
+                        <materialDesign:PackIcon
+                        Kind="ContentSaveEdit"
+                        Height="24"
+                        Width="24" />
+                    </Button>
+                    <Button
+                      Style="{StaticResource MaterialDesignFloatingActionDarkButton}"
+                      ToolTip="Удалить" Margin="476,90,178,314" Height="Auto" Width="Auto">
+                        <materialDesign:PackIcon
+                        Kind="Remove"
+                        Height="24"
+                        Width="24" />
+                    </Button>
+                </Grid>
+            </TabItem>
+            <TabItem >
+                <TabItem.Header>
+                    <Grid HorizontalAlignment="Stretch">
+                        <materialDesign:PackIcon Kind="Export" Foreground="White" VerticalAlignment="Stretch" />
+                        <Label Content="Выдача " VerticalContentAlignment="Bottom" Foreground="White" Margin="15,0,0,0"/>
+                    </Grid>
+                </TabItem.Header>
+                <Grid>
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="6*"/>
+                        <ColumnDefinition Width="253*"/>
+                        <ColumnDefinition Width="293*"/>
+                        <ColumnDefinition Width="121*"/>
+                    </Grid.ColumnDefinitions>
+
+                    <Rectangle
+  RadiusX="31"
+  RadiusY="31" Margin="-208,-264,228,547" Grid.ColumnSpan="2" >
+                        <Rectangle.Fill>
+                            <ImageBrush ImageSource="..\Resource\Images\93096ade87c88026d40c72ce83e25002-passport-and-flight-ticket-icon.jpg" TileMode="FlipXY"/>
+                        </Rectangle.Fill>
+                        <Rectangle.RenderTransform>
+                            <TranslateTransform
+      X="229"
+      Y="282" />
+                        </Rectangle.RenderTransform>
+                    </Rectangle>
+
+                    <Button Margin="58,115,24,288" Content="Паспорта" RenderTransformOrigin="0.491,4.312" Foreground="White" Grid.Column="1" Height="Auto" Click="Button_Click_2" />
+                    <Rectangle
+                        RadiusX="31"
+                        RadiusY="31" Margin="58,-264,248,547" Grid.ColumnSpan="2" Grid.Column="1" >
+                        <Rectangle.Fill>
+                            <ImageBrush ImageSource="..\Resource\Images\deti-i-gadzhety.jpg" Stretch="None"/>
+                        </Rectangle.Fill>
+                        <Rectangle.RenderTransform>
+                            <TranslateTransform
+                                X="229"
+                                Y="282" />
+                        </Rectangle.RenderTransform>
+                    </Rectangle>
+
+                    <Button Margin="66,115,49,288" Content="Св. о рождении" RenderTransformOrigin="0.507,0.531" Foreground="White" Grid.Column="2" Click="Button_Click" Height="Auto" />
+                    <Rectangle
+                        RadiusX="31"
+                        RadiusY="31" Margin="-207,-44,228,319" Grid.ColumnSpan="2" >
+                        <Rectangle.Fill>
+                            <ImageBrush ImageSource="..\Resource\Images\download.jpg" TileMode="Tile"/>
+                        </Rectangle.Fill>
+                        <Rectangle.RenderTransform>
+                            <TranslateTransform
+                                X="229"
+                                Y="282" />
+                        </Rectangle.RenderTransform>
+                    </Rectangle>
+                    <Button Margin="58,328,24,78" Content="Св. о браке" RenderTransformOrigin="0.491,4.312" Foreground="White" Grid.Column="1" Height="Auto" />
+                    <Rectangle
+                        RadiusX="31"
+                        RadiusY="31" Margin="63,-44,253,319" Grid.ColumnSpan="2" Grid.Column="1" >
+                        <Rectangle.Fill>
+                            <ImageBrush ImageSource="..\Resource\Images\1050669367_0_161_3069_1887_600x0_80_0_0_4e57187e5dcbec2e169819d9fb4325e5.jpg" Stretch="None"/>
+                        </Rectangle.Fill>
+                        <Rectangle.RenderTransform>
+                            <TranslateTransform
+                                X="229"
+                                Y="282" />
+                        </Rectangle.RenderTransform>
+                    </Rectangle>
+                </Grid>
+
+            </TabItem>
+
+        </TabControl>
+        <Label Content="v0.1.a"  Width="91" Margin="0,426,747,0" RenderTransformOrigin="0.487,0.533" Height="39" VerticalAlignment="Top" HorizontalAlignment="Right"/>
+    </Grid>
+
+</Window>
