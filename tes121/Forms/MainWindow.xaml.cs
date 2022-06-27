@@ -1,7 +1,13 @@
-﻿using System;
+﻿using FastReport;
+using FastReport.Data;
+using FastReport.Export.Html;
+using FastReport.Export.Image;
+using FastReport.Utils;
+using System;
 using System.Collections.Generic;
 using System.Data;
 using System.Data.Entity;
+using System.IO;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -23,11 +29,12 @@ namespace tes121
     /// </summary>
     public partial class MainWindow : Window
     {
+        static string TEMPDIR = System.IO.Path.GetTempPath();
         public MainWindow()
         {
            
             InitializeComponent();
-            DataContext = new ApplicationViewModel();
+            this.DataContext = new ApplicationViewModel();
 
             // tblOrdersDataGrid.ItemsSource = dbDataSetTableAdapters.Tables.OfType<DataTable>().Select(dt => dt.TableName);
         }
@@ -135,8 +142,7 @@ namespace tes121
 
         private void Button_Click_4(object sender, RoutedEventArgs e)
         {
-            FastReport.Report report = new FastReport.Report();
-
+            GenerateReport("Orders");
         }
 
         private void Button_Click_5(object sender, RoutedEventArgs e)
@@ -160,16 +166,78 @@ namespace tes121
 
         private void TabItem_Initialized_1(object sender, EventArgs e)
         {
-
+            AppDbContext db;
+            db = new AppDbContext();
+            db.Regions.Load();
+            this.DataContext = db.Regions.Local.ToBindingList();
         }
 
         private void TabItem_MouseDown(object sender, MouseButtonEventArgs e)
         {
             AppDbContext db;
             db = new AppDbContext();
-            db.Categories.Load();
-            var list = db.Categories.ToList();
-            this.DataContext = db.Categories.Local.ToBindingList();
+            db.Regions.Load();
+            this.DataContext = db.Regions.Local.ToBindingList();
+
+        }
+
+
+
+
+        public static void GenerateReport(string FileName)
+        {
+            RegisteredObjects.AddConnection(typeof(SQLiteDataConnection));
+            // Create new Report 
+            Report report = new Report();
+            string GetDir = Directory.GetCurrentDirectory();
+            // Load report from file
+            report.Load($"{GetDir}//Report//{FileName}.frx");
+            // Set the parameter
+            report.SetParameterValue("MYPARAMETER", 1024);
+            // Prepare the report
+            report.Prepare();
+            // Export in Jpeg
+            //ImageExport image = new ImageExport();
+            //image.ImageFormat = ImageExportFormat.Jpeg;
+            //// Set up the quality
+            //image.JpegQuality = 90;
+            //// Decrease a resolution
+            //image.Resolution = 72;
+            //// We need all pages in one big single file
+            //image.SeparateFiles = false;
+            //report.Export(image, "report.jpg");
+
+
+            HTMLExport html = new HTMLExport();
+            // We need embedded pictures inside html
+            html.EmbedPictures = true;
+            // Enable all report pages in one html file
+            html.SinglePage = true;
+            // We don't need a subfolder for pictures and additional files
+            html.SubFolder = false;
+            // Enable layered HTML
+            html.Layers = true;
+            // Turn off the toolbar with navigation
+            html.Navigator = false;
+            // Save the report in html
+            report.Export(html, $"{TEMPDIR}//report.html");
+            if (!File.Exists($"{TEMPDIR}//report.html")) return;
+            Forms.Print print = new Forms.Print();
+            print.ShowDialog();
+
+        }
+
+
+
+        private void Button_Click_6(object sender, RoutedEventArgs e)
+        {
+            GenerateReport("Positions");
+        }
+
+        private void Label_MouseDown(object sender, MouseButtonEventArgs e)
+        {
+            Forms.About about = new Forms.About();
+            about.Show();
         }
     }
 }

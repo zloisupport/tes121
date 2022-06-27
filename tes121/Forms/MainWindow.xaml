@@ -6,7 +6,7 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:tes121"
         mc:Ignorable="d"
-        Title="MainWindow" ResizeMode="NoResize" Height="504" Width="854" Loaded="Window_Loaded">
+        Title="ЗАГС =(" ResizeMode="NoResize" Height="504" Width="854" >
 
     <Grid>
         <TabControl TabStripPlacement="Left">
@@ -85,18 +85,7 @@
                             Width="24" />
                     </Button>
 
-                    <ListBox x:Name="phonesList" ItemsSource="{Binding}">
-                        <ListBox.ItemTemplate>
-                            <DataTemplate>
-                                <StackPanel>
 
-                                    <TextBlock Text="{Binding Names}" FontSize="12" />
-                                    
-                                </StackPanel>
-                            </DataTemplate>
-                        </ListBox.ItemTemplate>
-                    </ListBox>
-                    <Button Content="Button" HorizontalAlignment="Left" Margin="102,250,0,0" VerticalAlignment="Top" Width="76" Click="Button_Click_5"/>
                 </Grid>
             </TabItem>
             <TabItem Initialized="TabItem_Initialized" MouseDown="TabItem_MouseDown">
@@ -107,27 +96,9 @@
                     </Grid>
                 </TabItem.Header>
                 <Grid>
-                    <ListBox x:Name="ListRegion"  Grid.Column="0" ItemsSource="{Binding Regions}"
-                 SelectedItem="{Binding SelectedRegion}">
-                        <ListBox.ItemTemplate>
-                            <DataTemplate>
-                                <StackPanel Margin="5">
-                                    <TextBlock FontSize="18" Text="{Binding Path=Names}" />
-           
-                                </StackPanel>
-                            </DataTemplate>
-                        </ListBox.ItemTemplate>
-                    </ListBox>
 
-                    <StackPanel Grid.Column="1" DataContext="{Binding SelectedRegion}">
-                        <TextBlock Text="Выбранный элемент"  />
-                        <TextBlock Text="Модель" />
-                        <TextBox Text="{Binding Names, UpdateSourceTrigger=PropertyChanged}" />
- 
-                    </StackPanel>
-                    <ListBox DataContext="{Binding Names}" Margin="29,30,414,375" RenderTransformOrigin="0.449,0.461">
 
-                    </ListBox>
+                    <StackPanel Grid.Column="1" DataContext="{Binding SelectedRegion}"/>
                     <TextBox HorizontalAlignment="Left"  Text="{Binding Names, UpdateSourceTrigger=PropertyChanged}" Height="35" Margin="378,34,0,0" TextWrapping="Wrap" materialDesign:HintAssist.Hint="Регион" VerticalAlignment="Top" Width="154"/>
                     <Button
                       Style="{StaticResource MaterialDesignFloatingActionDarkButton}"
@@ -154,6 +125,17 @@
                             <RowDefinition Height="Auto"/>
                         </Grid.RowDefinitions>
                     </Grid>
+                    <ListBox x:Name="phonesList" ItemsSource="{Binding}" Margin="0,0,382,10">
+                        <ListBox.ItemTemplate>
+                            <DataTemplate>
+                                <StackPanel>
+                                    <TextBlock Text="{Binding Names}" FontSize="16" />
+                                </StackPanel>
+                            </DataTemplate>
+                        </ListBox.ItemTemplate>
+                    </ListBox>
+
+
                 </Grid>
             </TabItem>
             <TabItem >
@@ -224,13 +206,14 @@
                                 Y="282" />
                         </Rectangle.RenderTransform>
                     </Rectangle>
-                    <Button x:Name="BtnPIN" Margin="66,328,60,78" Content="Св. о браке" RenderTransformOrigin="0.491,4.312" Foreground="White" Grid.Column="2" Height="Auto" Click="BtnPIN_Click" />
+                    <Button x:Name="BtnPIN" Margin="77,239,49,167" Content="ПИН" RenderTransformOrigin="0.491,4.312" Foreground="White" Grid.Column="2" Height="Auto" Click="BtnPIN_Click" />
+                    <Button Margin="66,357,60,49" Content="Св. о браке" RenderTransformOrigin="0.491,4.312" Foreground="White" Grid.Column="2" Height="Auto" Click="Button_Click_6" />
                 </Grid>
 
             </TabItem>
 
         </TabControl>
-        <Label Content="v0.1.a"  Width="91" Margin="0,426,747,0" RenderTransformOrigin="0.487,0.533" Height="39" VerticalAlignment="Top" HorizontalAlignment="Right"/>
+        <Label Content="v0.1.a"  Width="91" Margin="0,426,747,0" RenderTransformOrigin="0.487,0.533" Height="39" VerticalAlignment="Top" HorizontalAlignment="Right" MouseDown="Label_MouseDown"/>
     </Grid>
 
 </Window>

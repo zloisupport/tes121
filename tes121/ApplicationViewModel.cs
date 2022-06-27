@@ -14,32 +14,26 @@ namespace tes121
 
     public class ApplicationViewModel : INotifyPropertyChanged
     {
-        private Region selectedRegion;
+        AppDbContext db;
 
-        public ObservableCollection<Region> Regions { get; set; }
-        public Region SelectedRegion
+
+        IEnumerable<Region> regions;
+
+        public IEnumerable<Region> Regions
         {
-            get { return selectedRegion; }
+            get { return regions; }
             set
             {
-                selectedRegion = value;
-                OnPropertyChanged("SelectedRegion");
+                regions = value;
+                OnPropertyChanged("Regions");
             }
         }
- 
 
         public ApplicationViewModel()
         {
-            Regions = new ObservableCollection<Region>
-            {
-               for (int i = 0; i < table.Rows.Count; ++i)
-                Regions.Add(new Person
-                {
-                    rn_id = table.Rows[i][0].ToString(),
-                    names = Convert.ToInt32(table.Rows[i][1]),
-                    TRIAL963 = table.Rows[i][2].ToString(),
-                });
-        };
+            db = new AppDbContext();
+            db.Regions.Load();
+            Regions = db.Regions.Local.ToBindingList();
         }
 
         public event PropertyChangedEventHandler PropertyChanged;
