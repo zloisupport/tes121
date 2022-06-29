@@ -1,0 +1,57 @@
+﻿<Window
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:tes121.Forms"
+        xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes" x:Class="tes121.Forms.BirthDoc"
+        mc:Ignorable="d"
+        Title="BirthDoc" Height="691.051" Width="755.657">
+    <Grid>
+        <GroupBox  Style="{StaticResource MaterialDesignCardGroupBox}" Header="Ребенок" HorizontalAlignment="Left" Height="491" Margin="10,10,0,0" VerticalAlignment="Top" Width="347">
+            <StackPanel Width="308">
+                <Label>Гражданин(ка)</Label>
+                <TextBox materialDesign:HintAssist.Hint=""/>
+                <Label>ИИН</Label>
+                <TextBox materialDesign:HintAssist.Hint="01365-04"/>
+                <Label>Родилась</Label>
+                <DatePicker materialDesign:HintAssist.Hint="День-Мес-Год" />
+                <Label>Места рождения</Label>
+                <TextBox materialDesign:HintAssist.Hint="Город Токмок"/>
+                <Label>Очем  в книге  регистарцаии актов о рождении</Label>
+                <DatePicker materialDesign:HintAssist.Hint="День-Мес-Год" />
+                <Label>Произведена запись №</Label>
+                <TextBox materialDesign:HintAssist.Hint="№0"/>
+            </StackPanel>
+        </GroupBox>
+        <GroupBox Style="{StaticResource MaterialDesignCardGroupBox}" Header="Родители" HorizontalAlignment="Left" Height="600" Margin="377,10,0,0" VerticalAlignment="Top" Width="347">
+
+            <StackPanel Width="308">
+                <Label Content="Отец"/>
+                <TextBox materialDesign:HintAssist.Hint=""/>
+                <Label Content="ПИН"/>
+                <TextBox materialDesign:HintAssist.Hint="01365-04"/>
+                <Label Content="Гражданство"/>
+                <TextBox materialDesign:HintAssist.Hint="Кыргызстан"/>
+                <Label>Национальность</Label>
+                <TextBox materialDesign:HintAssist.Hint="Кыргыз"/>
+                <Rectangle></Rectangle>
+                <Label>Мать</Label>
+                <TextBox materialDesign:HintAssist.Hint="Ф.И.О"/>
+                <Label Content="ПИН"/>
+                <TextBox materialDesign:HintAssist.Hint="01365-04"/>
+                <Label Content="Гражданство"/>
+                <TextBox materialDesign:HintAssist.Hint="Кыргызстан"/>
+                <Label>Национальность</Label>
+                <TextBox materialDesign:HintAssist.Hint="Кыргыз"/>
+                <Label>Место регистрации</Label>
+                <TextBox materialDesign:HintAssist.Hint="город Токмок"/>
+                <Label>Дата выдачи</Label>
+                <DatePicker materialDesign:HintAssist.Hint="День-Мес-Год" />  
+                <Label>Руководитель органа ЗАГС</Label>
+                <TextBox materialDesign:HintAssist.Hint="Ф.И.О"/>
+            </StackPanel>
+
+        </GroupBox>
+    </Grid>
+</Window>

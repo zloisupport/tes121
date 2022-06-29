@@ -18,16 +18,16 @@
                         <Label Content="Профиль" VerticalContentAlignment="Bottom" Foreground="White" Margin="15,0,0,-6"/>
                     </Grid>
                 </TabItem.Header>
-                <Grid >
-                    <TextBox x:Name="FistName" Margin="53,140,493,299" IsEnabled="False"  />
+                <Grid x:Name="sotudnikInfo" DataContext="{Binding Sotrudniks}">
+                    <TextBox x:Name="FistName" Text="{Binding Fam}" Margin="53,140,493,299" IsEnabled="False"  />
                     <Label Content="Фамилия" HorizontalAlignment="Left" Margin="53,112,0,0" VerticalAlignment="Top" RenderTransformOrigin="-0.278,1.125" Width="163"/>
                     <Label Content="Имя" HorizontalAlignment="Left" Margin="277,110,0,0" VerticalAlignment="Top" RenderTransformOrigin="-0.278,1.125" Width="163"/>
 
                     <Label Content="Отчество" HorizontalAlignment="Left" Margin="53,192,0,0" VerticalAlignment="Top" RenderTransformOrigin="-0.278,1.125" Width="163"/>
-                    <TextBox x:Name="Position" Margin="512,322,0,118" IsReadOnly="True" RenderTransformOrigin="0.47,0.455" HorizontalAlignment="Left" Width="133" IsEnabled="False" />
+                    <TextBox x:Name="Position" Text="{Binding Dolzh_id}"  Margin="512,322,0,118" IsReadOnly="True" RenderTransformOrigin="0.47,0.455" HorizontalAlignment="Left" Width="133" IsEnabled="False" />
                     <Label Content="Ваша должность"  HorizontalAlignment="Left" Margin="512,277,0,0" VerticalAlignment="Top" RenderTransformOrigin="-0.278,1.125" Width="163"/>
                     <Label Content="Адрес проживания" Margin="265,192,304,0" VerticalAlignment="Top" />
-                    <Button x:Name="BtnSave" Content="Сохранить" HorizontalAlignment="Left" Margin="403,411,0,0" VerticalAlignment="Top" Width="198" IsEnabled="False"/>
+
                     <Ellipse HorizontalAlignment="Left" Height="148" Margin="512,8,0,0" VerticalAlignment="Top" Width="152">
                         <Ellipse.Fill>
                             <ImageBrush ImageSource="..\Resource\Images\logo.jpg" />
@@ -36,19 +36,20 @@
                     <Label Content="Телефон"  HorizontalAlignment="Left" Margin="53,277,0,0" VerticalAlignment="Top" RenderTransformOrigin="-0.278,1.125" Width="163"/>
 
                     <Label Content="Email"  HorizontalAlignment="Left" Margin="265,277,0,0" VerticalAlignment="Top" RenderTransformOrigin="-0.278,1.125" Width="163"/>
-                    <TextBox x:Name="LastName" Margin="278,140,269,299" IsEnabled="False"  />
-                    <TextBox x:Name="Address" Margin="265,222,113,217" IsEnabled="False"  />
-                    <TextBox x:Name="SubName" Margin="53,222,493,217" IsEnabled="False"  />
-                    <TextBox x:Name="Email" Margin="265,322,287,117" IsEnabled="False"  />
-                    <TextBox x:Name="Phone" Margin="53,323,516,117" IsEnabled="False"  />
-                    <TextBox Name="Login" Margin="114,54,493,385" IsEnabled="False"  />
+                    <TextBox x:Name="LastName"  Text="{Binding Names}" Margin="278,140,269,299" IsEnabled="False"  />
+                    <TextBox x:Name="Address" Text="{Binding Fact_addr}" Margin="265,222,113,217" IsEnabled="False"  />
+                    <TextBox x:Name="SubName" Text="{Binding Subname}" Margin="53,222,493,217" IsEnabled="False"  />
+                    <TextBox x:Name="Email"  Margin="265,322,287,117" IsEnabled="False"  />
+                    <TextBox x:Name="Phone" Text="{Binding Phones}" Margin="53,323,516,117" IsEnabled="False"  />
+                    <TextBox x:Name="Login" Text="{Binding Login}" Margin="114,54,493,385" IsEnabled="False"  />
                     <Label Content="Логин" HorizontalAlignment="Left" Margin="53,54,0,0" VerticalAlignment="Top" RenderTransformOrigin="-0.278,1.125" Width="56"/>
-                    <PasswordBox x:Name="pwdBox" PasswordChar="*" Margin="320,54,287,385" IsEnabled="False"  />
+                    <PasswordBox x:Name="pwdBox"  PasswordChar="*" Margin="320,54,287,385" IsEnabled="False"  />
                     <TextBox x:Name="pwdTxtBox" Text="{Binding Password , Mode=TwoWay,ElementName=pwdBox}" Margin="320,54,287,385" Visibility="Collapsed" />
                     <Label Content="Пароль&#xA;" HorizontalAlignment="Left" Margin="254,54,0,0" VerticalAlignment="Top" RenderTransformOrigin="-0.278,1.125" Width="56"/>
                     <materialDesign:PackIcon x:Name="BtnSHpwd"  Kind="Show" HorizontalAlignment="Left" Margin="457,54,0,0" VerticalAlignment="Top" Height="36" Width="44" MouseDown="ShowHidePwd" IsEnabled="False"/>
                     <Button Style="{StaticResource MaterialDesignRaisedAccentButton}" x:Name="BtnChange" IsDefault="False" Content="Изменить" HorizontalAlignment="Left" Margin="150,411,0,0" VerticalAlignment="Top" Width="198" Click="BtnChange_Click"/>
-
+                    <Button x:Name="BtnSave"  Command="{Binding EditSotrudnikCommand}"
+                    CommandParameter="{Binding ElementName=sotudnikInfo}" Content="Сохранить" HorizontalAlignment="Left" Margin="403,411,0,0" VerticalAlignment="Top" Width="198" IsEnabled="False" />
                 </Grid>
 
 
@@ -59,6 +60,7 @@
                     <Grid HorizontalAlignment="Stretch">
                         <materialDesign:PackIcon Kind="Historic" Foreground="White" VerticalAlignment="Stretch" />
                         <Label Content="История" VerticalContentAlignment="Bottom" Foreground="White" Margin="15,0,0,-5"/>
+
                     </Grid>
                 </TabItem.Header>
                 <Grid Name="GridHistory" >
@@ -85,6 +87,18 @@
                             Width="24" />
                     </Button>
 
+                    <ListBox x:Name="HistoryList" ItemsSource="{Binding Orders}" Margin="0,0,381,0">
+                        <ListBox.ItemTemplate>
+                            <DataTemplate>
+                                <StackPanel>
+                                    <TextBlock Text="{Binding cat_id}" FontSize="16" />
+                                    <TextBlock Text="{Binding manager_id}" FontSize="14" />
+                                    <TextBlock Text="{Binding client_id}" FontSize="10" />
+                                    <TextBlock Text="{Binding date_orders}" FontSize="10" />
+                                </StackPanel>
+                            </DataTemplate>
+                        </ListBox.ItemTemplate>
+                    </ListBox>
 
                 </Grid>
             </TabItem>
@@ -93,29 +107,56 @@
                     <Grid HorizontalAlignment="Stretch">
                         <materialDesign:PackIcon Kind="Map" Foreground="White" VerticalAlignment="Stretch" />
                         <Label Content="Регионы" VerticalContentAlignment="Bottom" Foreground="White" Margin="15,0,0,0"/>
+
                     </Grid>
+
                 </TabItem.Header>
                 <Grid>
-
-
-                    <StackPanel Grid.Column="1" DataContext="{Binding SelectedRegion}"/>
-                    <TextBox HorizontalAlignment="Left"  Text="{Binding Names, UpdateSourceTrigger=PropertyChanged}" Height="35" Margin="378,34,0,0" TextWrapping="Wrap" materialDesign:HintAssist.Hint="Регион" VerticalAlignment="Top" Width="154"/>
+                    <StackPanel Grid.Column="1"  DataContext="{Binding SelectedRegion}">
+                        <TextBox HorizontalAlignment="Left"  Text="{Binding Names}" Height="35" Margin="378,34,0,0" TextWrapping="Wrap" materialDesign:HintAssist.Hint="Регион" VerticalAlignment="Top" Width="265"/>
+                    </StackPanel>
                     <Button
-                      Style="{StaticResource MaterialDesignFloatingActionDarkButton}"
-                      ToolTip="Сохранить" Margin="378,90,279,314" Height="Auto" Width="Auto">
+                      Style="{StaticResource MaterialDesignFloatingActionDarkButton}" Command="{Binding AddCommand}" 
+                      ToolTip="Добавить" Margin="378,90,279,314" Height="Auto" Width="Auto">
                         <materialDesign:PackIcon
-                        Kind="ContentSaveEdit"
+                        Kind="Add"
                         Height="24"
                         Width="24" />
                     </Button>
                     <Button
-                      Style="{StaticResource MaterialDesignFloatingActionDarkButton}"
-                      ToolTip="Удалить" Margin="476,90,178,314" Height="Auto" Width="Auto">
+                      Style="{StaticResource MaterialDesignFloatingActionDarkButton}"  Command="{Binding DeleteCommand}"
+                    CommandParameter="{Binding ElementName=phonesList, Path=SelectedItem}"
+                      ToolTip="Удалить" Margin="572,90,82,314" Height="Auto" Width="Auto" >
                         <materialDesign:PackIcon
-                        Kind="Remove"
+                        Kind="Trash"
                         Height="24"
                         Width="24" />
                     </Button>
+
+                    <Button
+                      Style="{StaticResource MaterialDesignFloatingActionDarkButton}" Command="{Binding EditCommand}"
+                    CommandParameter="{Binding ElementName=phonesList, Path=SelectedItem}"
+                      ToolTip="Удалить" Margin="473,90,181,314" Height="Auto" Width="Auto">
+                        <materialDesign:PackIcon
+                        Kind="Edit"
+                        Height="24"
+                        Width="24" />
+                    </Button>
+
+                    <ListBox x:Name="phonesList" ItemsSource="{Binding Regions}" SelectedItem="{Binding SelectedRegion}" Margin="0,0,381,0">
+                        <ListBox.ItemTemplate>
+                            <DataTemplate>
+                                <StackPanel>
+                                    <TextBlock Text="{Binding Names}" FontSize="16" />
+                                </StackPanel>
+                            </DataTemplate>
+                        </ListBox.ItemTemplate>
+
+                    </ListBox>
+
+
+
+
                     <Grid x:Name="grid1" HorizontalAlignment="Left" Margin="58,131,0,0" VerticalAlignment="Top">
                         <Grid.ColumnDefinitions>
                             <ColumnDefinition Width="Auto"/>
@@ -125,17 +166,6 @@
                             <RowDefinition Height="Auto"/>
                         </Grid.RowDefinitions>
                     </Grid>
-                    <ListBox x:Name="phonesList" ItemsSource="{Binding}" Margin="0,0,382,10">
-                        <ListBox.ItemTemplate>
-                            <DataTemplate>
-                                <StackPanel>
-                                    <TextBlock Text="{Binding Names}" FontSize="16" />
-                                </StackPanel>
-                            </DataTemplate>
-                        </ListBox.ItemTemplate>
-                    </ListBox>
-
-
                 </Grid>
             </TabItem>
             <TabItem >
@@ -143,6 +173,7 @@
                     <Grid HorizontalAlignment="Stretch">
                         <materialDesign:PackIcon Kind="Export" Foreground="White" VerticalAlignment="Stretch" />
                         <Label Content="Выдача " VerticalContentAlignment="Bottom" Foreground="White" Margin="15,0,0,0"/>
+
                     </Grid>
                 </TabItem.Header>
                 <Grid>
@@ -206,8 +237,11 @@
                                 Y="282" />
                         </Rectangle.RenderTransform>
                     </Rectangle>
-                    <Button x:Name="BtnPIN" Margin="77,239,49,167" Content="ПИН" RenderTransformOrigin="0.491,4.312" Foreground="White" Grid.Column="2" Height="Auto" Click="BtnPIN_Click" />
-                    <Button Margin="66,357,60,49" Content="Св. о браке" RenderTransformOrigin="0.491,4.312" Foreground="White" Grid.Column="2" Height="Auto" Click="Button_Click_6" />
+                    <Button x:Name="BtnPIN" Margin="66,328,60,78" Content="ПИН" RenderTransformOrigin="0.491,4.312" Foreground="White" Grid.Column="2" Height="Auto" Click="BtnPIN_Click" />
+                    <Button Margin="25,365,27,41" Content="3" RenderTransformOrigin="0.491,4.312" Foreground="White" Grid.Column="3" Height="Auto" Click="Button_Click_6" />
+                    <Button Margin="25,242,27,164" Content="2" RenderTransformOrigin="0.491,4.312" Foreground="White" Grid.Column="3" Height="Auto" Click="Button_Click_6" />
+                    <Button Margin="25,118,27,288" Content="1" RenderTransformOrigin="0.491,4.312" Foreground="White" Grid.Column="3" Height="Auto" Click="Button_Click_6" />
+                    <Label Content="Test Btn DEV" Grid.Column="3" HorizontalAlignment="Left" Margin="39,52,0,0" VerticalAlignment="Top" Width="83"/>
                 </Grid>
 
             </TabItem>

@@ -36,8 +36,15 @@ namespace tes121.Forms
             if(isValidUser(this.LoginBox.Text, this.PwdBox.Password))
             {
                 this.Hide();
-                var ap = new MainWindow();
-                ap.Show();
+
+              
+                MainWindow phoneWindow = new MainWindow(new Sotrudnik
+                {
+                    
+                });
+
+
+                phoneWindow.Show();
                 this.Close();
             }
             else

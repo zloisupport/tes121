@@ -15,6 +15,9 @@ namespace tes121
 
        public DbSet<Category> Categories { get; set; }
        public DbSet<Region> Regions { get; set; }
+       public DbSet<Orders> Orders { get; set; }
+       public DbSet<Sotrudnik> Sotrudniks { get; set; }
+       public DbSet<Dolzh> Dolzhs { get; set; }
 
     }
 }

@@ -1,7 +1,7 @@
-﻿using FastReport;
+﻿
+using FastReport;
 using FastReport.Data;
 using FastReport.Export.Html;
-using FastReport.Export.Image;
 using FastReport.Utils;
 using System;
 using System.Collections.Generic;
@@ -29,12 +29,16 @@ namespace tes121
     /// </summary>
     public partial class MainWindow : Window
     {
+        public Sotrudnik Sotrudnik { get; private set; }
+
         static string TEMPDIR = System.IO.Path.GetTempPath();
-        public MainWindow()
+        public MainWindow(Sotrudnik s)
         {
            
             InitializeComponent();
-            this.DataContext = new ApplicationViewModel();
+            Sotrudnik = s;
+
+            this.DataContext = Sotrudnik;
 
             // tblOrdersDataGrid.ItemsSource = dbDataSetTableAdapters.Tables.OfType<DataTable>().Select(dt => dt.TableName);
         }
@@ -142,7 +146,15 @@ namespace tes121
 
         private void Button_Click_4(object sender, RoutedEventArgs e)
         {
-            GenerateReport("Orders");
+            try
+            {
+                GenerateReport("Orders");
+            }
+            catch (Exception)
+            {
+                System.Windows.MessageBox.Show("Ошибка" + e.ToString(), "Я упал извините 😭");
+            }
+            
         }
 
         private void Button_Click_5(object sender, RoutedEventArgs e)
@@ -157,27 +169,16 @@ namespace tes121
         /// <param name="e"></param>
         private void TabItem_Initialized(object sender, EventArgs e)
         {
-            AppDbContext db;
-            db = new AppDbContext();
-            db.Categories.Load();
-            var list = db.Categories.ToList();
-            this.DataContext = list;
+
         }
 
         private void TabItem_Initialized_1(object sender, EventArgs e)
         {
-            AppDbContext db;
-            db = new AppDbContext();
-            db.Regions.Load();
-            this.DataContext = db.Regions.Local.ToBindingList();
+
         }
 
         private void TabItem_MouseDown(object sender, MouseButtonEventArgs e)
         {
-            AppDbContext db;
-            db = new AppDbContext();
-            db.Regions.Load();
-            this.DataContext = db.Regions.Local.ToBindingList();
 
         }
 
@@ -186,7 +187,7 @@ namespace tes121
 
         public static void GenerateReport(string FileName)
         {
-            RegisteredObjects.AddConnection(typeof(SQLiteDataConnection));
+           RegisteredObjects.AddConnection(typeof(SQLiteDataConnection));
             // Create new Report 
             Report report = new Report();
             string GetDir = Directory.GetCurrentDirectory();
@@ -231,7 +232,13 @@ namespace tes121
 
         private void Button_Click_6(object sender, RoutedEventArgs e)
         {
-            GenerateReport("Positions");
+            try {
+                GenerateReport("Positions");
+            }
+            catch (Exception)
+            {
+                System.Windows.MessageBox.Show("Ошибка"+ e.ToString());
+            }
         }
 
         private void Label_MouseDown(object sender, MouseButtonEventArgs e)
@@ -239,5 +246,6 @@ namespace tes121
             Forms.About about = new Forms.About();
             about.Show();
         }
+
     }
 }

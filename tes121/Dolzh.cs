@@ -9,17 +9,13 @@ using System.Threading.Tasks;
 
 namespace tes121
 {
-    public class Category : INotifyPropertyChanged
+    public class Dolzh : INotifyPropertyChanged
     {
+
         [Key]
-        public int categoryId { get; set; }
+        public int dolzh_id { get; set; }
         private string names { get; set; }
-        public char TRIAL957 { get; set; }
-
-        //public Orders orders { get; set; }
-
-
-
+        public char TRIAL960 { get; set; }
 
         public string Names
         {
@@ -30,13 +26,19 @@ namespace tes121
                 OnPropertyChanged("Names");
             }
         }
+        public virtual ICollection<Sotrudnik> Sotrudnik { get; set; }
 
 
+        public override string ToString()
+        {
+            return Names;
+        }
         public event PropertyChangedEventHandler PropertyChanged;
         public void OnPropertyChanged([CallerMemberName] string prop = "")
         {
             if (PropertyChanged != null)
                 PropertyChanged(this, new PropertyChangedEventArgs(prop));
         }
+
     }
 }
