@@ -32,20 +32,18 @@ namespace tes121
         public Sotrudnik Sotrudnik { get; private set; }
 
         static string TEMPDIR = System.IO.Path.GetTempPath();
-        public MainWindow(Sotrudnik s)
+        public MainWindow()
         {
            
             InitializeComponent();
-            Sotrudnik = s;
-
-            this.DataContext = Sotrudnik;
 
             // tblOrdersDataGrid.ItemsSource = dbDataSetTableAdapters.Tables.OfType<DataTable>().Select(dt => dt.TableName);
         }
 
         private void Button_Click(object sender, RoutedEventArgs e)
         {
-
+            Forms.BirthDoc birthDoc = new Forms.BirthDoc();
+            birthDoc.ShowDialog();
         }
 
         private void Button_Click_1(object sender, RoutedEventArgs e)
@@ -241,11 +239,19 @@ namespace tes121
             }
         }
 
+
+
+
         private void Label_MouseDown(object sender, MouseButtonEventArgs e)
         {
             Forms.About about = new Forms.About();
             about.Show();
         }
 
+        private void Button_Click_7(object sender, RoutedEventArgs e)
+        {
+            Forms.MarrinageDoc marrinage = new Forms.MarrinageDoc();
+            marrinage.ShowDialog();
+        }
     }
 }

@@ -20,6 +20,7 @@ namespace tes121
         RelayCommand deleteCommand;
         RelayCommand editSotrudnikCommand;
         RelayCommand editCommand;
+        RelayCommand showWindow;
 
         private Region selectedRegion;
         private Sotrudnik selectedSotrudnik;
@@ -103,6 +104,7 @@ namespace tes121
         }
 
 
+
         public RelayCommand DeleteCommand
         {
             get
@@ -155,6 +157,8 @@ namespace tes121
         }
 
 
+       
+
         // команда редактирования
         public RelayCommand EditCommand
         {
@@ -178,6 +182,10 @@ namespace tes121
         }
 
 
+        void ShowWindow()
+        {
+
+        }
         // команда редактирования
         public RelayCommand EditSotrudnikCommand
         {

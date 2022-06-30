@@ -38,13 +38,13 @@ namespace tes121.Forms
                 this.Hide();
 
               
-                MainWindow phoneWindow = new MainWindow(new Sotrudnik
-                {
+                //MainWindow phoneWindow = new MainWindow(new Sotrudnik
+                //{
                     
-                });
+                //});
 
 
-                phoneWindow.Show();
+            //    phoneWindow.Show();
                 this.Close();
             }
             else

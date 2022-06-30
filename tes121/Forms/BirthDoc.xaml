@@ -6,52 +6,58 @@
         xmlns:local="clr-namespace:tes121.Forms"
         xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes" x:Class="tes121.Forms.BirthDoc"
         mc:Ignorable="d"
-        Title="BirthDoc" Height="691.051" Width="755.657">
+        Title="Св о рождении" Height="721.051" Width="755.657">
     <Grid>
         <GroupBox  Style="{StaticResource MaterialDesignCardGroupBox}" Header="Ребенок" HorizontalAlignment="Left" Height="491" Margin="10,10,0,0" VerticalAlignment="Top" Width="347">
             <StackPanel Width="308">
                 <Label>Гражданин(ка)</Label>
-                <TextBox materialDesign:HintAssist.Hint=""/>
-                <Label>ИИН</Label>
-                <TextBox materialDesign:HintAssist.Hint="01365-04"/>
+                <TextBox x:Name="Citizen" materialDesign:HintAssist.Hint=""/>
                 <Label>Родилась</Label>
-                <DatePicker materialDesign:HintAssist.Hint="День-Мес-Год" />
+                <DatePicker x:Name="Dtb" materialDesign:HintAssist.Hint="День-Мес-Год" Initialized="Dtb_Initialized" CalendarClosed="Dtb_CalendarClosed"  SelectedDateFormat="Short" />
                 <Label>Места рождения</Label>
-                <TextBox materialDesign:HintAssist.Hint="Город Токмок"/>
-                <Label>Очем  в книге  регистарцаии актов о рождении</Label>
-                <DatePicker materialDesign:HintAssist.Hint="День-Мес-Год" />
+                <TextBox x:Name="BirthRegion" materialDesign:HintAssist.Hint="Город Токмок"/>
+                <Label Content="Дата регистрации акта"/>
+                <DatePicker Name="Dtb1" materialDesign:HintAssist.Hint="День-Мес-Год" />
                 <Label>Произведена запись №</Label>
-                <TextBox materialDesign:HintAssist.Hint="№0"/>
+                <TextBox x:Name="RegNumber" materialDesign:HintAssist.Hint="№0" IsEnabledChanged="RegNumber_IsEnabledChanged" GotFocus="RegNumber_GotFocus"/>
+                <Label Content="ИИН"/>
+                <TextBox x:Name="IIN" materialDesign:HintAssist.Hint="01365-04"/>
             </StackPanel>
         </GroupBox>
         <GroupBox Style="{StaticResource MaterialDesignCardGroupBox}" Header="Родители" HorizontalAlignment="Left" Height="600" Margin="377,10,0,0" VerticalAlignment="Top" Width="347">
 
             <StackPanel Width="308">
                 <Label Content="Отец"/>
-                <TextBox materialDesign:HintAssist.Hint=""/>
+                <TextBox x:Name="Father" materialDesign:HintAssist.Hint=""/>
                 <Label Content="ПИН"/>
-                <TextBox materialDesign:HintAssist.Hint="01365-04"/>
+                <TextBox x:Name="FatherPIN" materialDesign:HintAssist.Hint="01365-04"/>
                 <Label Content="Гражданство"/>
-                <TextBox materialDesign:HintAssist.Hint="Кыргызстан"/>
+                <TextBox x:Name="FatherCitizen" materialDesign:HintAssist.Hint="Кыргызстан"/>
                 <Label>Национальность</Label>
-                <TextBox materialDesign:HintAssist.Hint="Кыргыз"/>
+                <TextBox  x:Name="FatherNationality" materialDesign:HintAssist.Hint="Кыргыз"/>
                 <Rectangle></Rectangle>
                 <Label>Мать</Label>
-                <TextBox materialDesign:HintAssist.Hint="Ф.И.О"/>
+                <TextBox x:Name="Mother" materialDesign:HintAssist.Hint="Ф.И.О"/>
                 <Label Content="ПИН"/>
-                <TextBox materialDesign:HintAssist.Hint="01365-04"/>
+                <TextBox x:Name="MotherPIN" materialDesign:HintAssist.Hint="01365-04"/>
                 <Label Content="Гражданство"/>
-                <TextBox materialDesign:HintAssist.Hint="Кыргызстан"/>
+                <TextBox x:Name="MotherCitizen" materialDesign:HintAssist.Hint="Кыргызстан"/>
                 <Label>Национальность</Label>
-                <TextBox materialDesign:HintAssist.Hint="Кыргыз"/>
+                <TextBox  x:Name="MotherNationality" materialDesign:HintAssist.Hint="Кыргыз"/>
                 <Label>Место регистрации</Label>
-                <TextBox materialDesign:HintAssist.Hint="город Токмок"/>
+                <TextBox x:Name="RegRegion"  materialDesign:HintAssist.Hint="город Токмок"/>
                 <Label>Дата выдачи</Label>
-                <DatePicker materialDesign:HintAssist.Hint="День-Мес-Год" />  
+                <DatePicker   x:Name="DeliveryDate" materialDesign:HintAssist.Hint="День-Мес-Год" />
                 <Label>Руководитель органа ЗАГС</Label>
-                <TextBox materialDesign:HintAssist.Hint="Ф.И.О"/>
+                <ComboBox x:Name="ZagsDirector"/>
             </StackPanel>
 
         </GroupBox>
+        <Button Content="Печать" HorizontalAlignment="Left" Margin="39,615,0,0" VerticalAlignment="Top" Width="149" Height="38" Click="Button_Click"/>
+        <Button IsCancel="True" Content="Выйти" HorizontalAlignment="Left" Margin="436,615,0,0" VerticalAlignment="Top" Width="149" Height="38"/>
+        <Image x:Name="QrDocInf" HorizontalAlignment="Left" Height="100" Margin="10,510,0,0" VerticalAlignment="Top" Width="100"/>
+        <Image x:Name="QrAllInf" HorizontalAlignment="Left" Height="100" Margin="152,510,0,0" VerticalAlignment="Top" Width="100"/>
+        <Button x:Name="BtnExport" Content="Экспорт в .docx " HorizontalAlignment="Left" Margin="221,615,0,0" VerticalAlignment="Top" Width="136" Height="38" Click="ExportToDoc"/>
+        <Label x:Name="LblStatus" Content="" HorizontalAlignment="Left" Margin="251,658,0,0" VerticalAlignment="Top" Width="155"/>
     </Grid>
 </Window>

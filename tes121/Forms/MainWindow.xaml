@@ -211,7 +211,7 @@
                         </Rectangle.RenderTransform>
                     </Rectangle>
 
-                    <Button Margin="66,115,49,288" Content="Св. о рождении" RenderTransformOrigin="0.507,0.531" Foreground="White" Grid.Column="2" Click="Button_Click" Height="Auto" />
+                    <Button x:Name="OpenBirthDialog" Margin="66,115,49,288" Command="{Binding OpenWindowCommand}" Content="Св. о рождении" RenderTransformOrigin="0.507,0.531" Foreground="White" Grid.Column="2" Click="Button_Click" Height="Auto" />
                     <Rectangle
                         RadiusX="31"
                         RadiusY="31" Margin="-207,-44,228,319" Grid.ColumnSpan="2" >
@@ -224,7 +224,7 @@
                                 Y="282" />
                         </Rectangle.RenderTransform>
                     </Rectangle>
-                    <Button Margin="58,328,24,78" Content="Св. о браке" RenderTransformOrigin="0.491,4.312" Foreground="White" Grid.Column="1" Height="Auto" />
+                    <Button Margin="58,328,24,78" Content="Св. о браке" RenderTransformOrigin="0.491,4.312" Foreground="White" Grid.Column="1" Height="Auto" Click="Button_Click_7" />
                     <Rectangle
                         RadiusX="31"
                         RadiusY="31" Margin="63,-44,253,319" Grid.ColumnSpan="2" Grid.Column="1" >
@@ -237,11 +237,7 @@
                                 Y="282" />
                         </Rectangle.RenderTransform>
                     </Rectangle>
-                    <Button x:Name="BtnPIN" Margin="66,328,60,78" Content="ПИН" RenderTransformOrigin="0.491,4.312" Foreground="White" Grid.Column="2" Height="Auto" Click="BtnPIN_Click" />
-                    <Button Margin="25,365,27,41" Content="3" RenderTransformOrigin="0.491,4.312" Foreground="White" Grid.Column="3" Height="Auto" Click="Button_Click_6" />
-                    <Button Margin="25,242,27,164" Content="2" RenderTransformOrigin="0.491,4.312" Foreground="White" Grid.Column="3" Height="Auto" Click="Button_Click_6" />
-                    <Button Margin="25,118,27,288" Content="1" RenderTransformOrigin="0.491,4.312" Foreground="White" Grid.Column="3" Height="Auto" Click="Button_Click_6" />
-                    <Label Content="Test Btn DEV" Grid.Column="3" HorizontalAlignment="Left" Margin="39,52,0,0" VerticalAlignment="Top" Width="83"/>
+                    <Button x:Name="BtnPIN" Margin="66,328,60,78" Content="ПИН" RenderTransformOrigin="0.491,4.312" Foreground="White" Grid.Column="2" Height="Auto" Click="BtnPIN_Click" IsEnabled="False" />
                 </Grid>
 
             </TabItem>
